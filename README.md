@@ -26,3 +26,18 @@ Ainsi, dans cette étape, implémentez les classes `PresidentGame` et `Player`.
  `python test_exercice2.py`
 
  
+## Exercice 3
+Nous avons maintenant une partie qui peut se lancer. N'ayant pas d'interface
+ graphique pour le moment, nous allons réaliser les échanges avec le joueur
+  par le biais de la console. 
+
+A partir du fichier `main.py`, implémentez une petite interface pour repr
+ésenter les cartes au sein de la console, et permettre au joueur de choisir les cartes à joueur. 
+ 
+ Il est possible de sélectionner plusieurs cartes dès lors qu'elles ont la m
+ ême valeur. 
+ 
+ Une vérification doit être mise en place pour voir si le choix de l
+ 'utilisateur est correct.
+ 
+ 
