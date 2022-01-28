@@ -18,12 +18,12 @@ VALUES = {
 }
 class Deck:
     """ Deck du jeu de société du Président. """
-    __cards : list = []
     def __init__(self):
+        self.__cards : list = []
         """ Génération d'un deck de 52 cartes"""
         for (symbol, val) in VALUES.items():
             for color in COLORS:
-                new_card = Card(symbol, val, color)
+                new_card = Card(symbol, color)
                 self.__cards.append(new_card)
 
     def shuffle(self) -> None:
@@ -33,14 +33,25 @@ class Deck:
     def __str__(self) -> str:
         return str(self.__cards)
 
+    @property
+    def cards(self):
+        return self.__cards
+
 class Card:
     __symbol : str
     __value : int
     __color: str
 
-    def __init__(self, symbol: str, value: int, color:str):
+    def __init__(self, symbol: str, color:str):
+        """
+            Card Constructor.
+            attrs:
+                symbol: One of the VALUES keys.
+                color:  One of the  COLORS values.
+        """
+
         self.__symbol = symbol
-        self.__value = value
+        self.__value = VALUES[symbol]
         self.__color = color
 
     def __lt__(self, other):
