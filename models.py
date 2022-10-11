@@ -3,24 +3,26 @@ import names
 
 COLORS = ['♡', '♤', '♧', '♢']
 VALUES = {
-    '2' : 15,
-    '3' : 3,
-    '4' : 4,
-    '5' : 5,
-    '6' : 6,
-    '7' : 7,
-    '8' : 8,
-    '9' : 9,
+    '2': 15,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9,
     '10': 10,
-    'V' : 11,
-    'D' : 12,
-    'R' : 13,
-    'A' : 14
+    'V': 11,
+    'D': 12,
+    'R': 13,
+    'A': 14
 }
+
+
 class Deck:
     """ Deck du jeu de société du Président. """
     def __init__(self):
-        self.__cards : list = []
+        self.__cards: list = []
         """ Génération d'un deck de 52 cartes"""
         for (symbol, val) in VALUES.items():
             for color in COLORS:
@@ -41,12 +43,13 @@ class Deck:
     def cards(self):
         return self.__cards
 
+
 class Card:
-    __symbol : str
-    __value : int
+    __symbol: str
+    __value: int
     __color: str
 
-    def __init__(self, symbol: str, color:str):
+    def __init__(self, symbol: str, color: str):
         """
             Card Constructor.
             attrs:
@@ -81,9 +84,10 @@ class Card:
     def __repr__(self):
         return f"{self.__symbol} {self.__color}"
 
+
 class Player:
-    def __init__(self, player_name = None):
-        self._name:str = player_name if player_name is not None else \
+    def __init__(self, player_name=None):
+        self._name: str = player_name if player_name is not None else \
             names.get_first_name()
         self._hand: list = []
 
@@ -91,7 +95,7 @@ class Player:
         self._hand.append(card)
         self._hand.sort()
 
-    def remove_from_hand(self, cards : list):
+    def remove_from_hand(self, cards: list):
         for c in cards:
             self._hand.remove(c)
 
@@ -104,6 +108,15 @@ class Player:
         return self._name
 
     def play(self, symbol) -> list:
+        """
+        Remove from the hand of the player, all cards having a corresponding symbol.
+        Args:
+            symbol: The symbol to look for.
+
+        Returns: The cards removed from the hand of the player. It will return an empty array if
+        nothing is found.
+
+        """
         cards_played = [card for card in self._hand if card.symbol ==
                         symbol]
         self.remove_from_hand(cards_played)
@@ -119,19 +132,31 @@ class Player:
                 nb_cards += 1
         return nb_cards
 
+
 class AIPlayer(Player):
     def play(self, choice, nb_cards: int) -> list:
+        """
+        Play a card correspondig to what has been played on the table.
+        TODO: Implement an AI
+        Args:
+            choice: The minimum card value to play.
+            nb_cards: The number of cards to play.
+
+        Returns: An array of cards to play.
+
+        """
         best_choice = None
         for index, card in enumerate(self.hand):
-            if best_choice == None and card.symbol >= choice and \
+            if best_choice is None and card.symbol >= choice and \
                     self.has_symbol(card.symbol) >= \
                     nb_cards:
                 cards_played = self._hand[index:index+nb_cards]
                 best_choice = card.symbol
         return cards_played if best_choice is not None else []
 
+
 class PresidentGame:
-    def __init__(self, nb_players : int = 4):
+    def __init__(self, nb_players: int = 4):
         self.__generate_players(nb_players)
         self.__generate_cards()
         self.round = 0
@@ -142,7 +167,7 @@ class PresidentGame:
             self.__players.append(AIPlayer())
 
     def __generate_cards(self):
-        self.__deck= Deck()
+        self.__deck = Deck()
         self.__deck.shuffle()
 
     def distribute_cards(self):

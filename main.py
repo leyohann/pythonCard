@@ -1,9 +1,17 @@
 from models import PresidentGame
 
+
 def print_ln():
     print('\n')
 
-def game_loop(g : PresidentGame):
+
+def game_loop(g: PresidentGame):
+    """
+    The main game loop.
+    Loops in circle until the user wants to quit the application.
+    Args:
+        g: The President Game instance.
+    """
     wanna_continue = True
     while wanna_continue:
 
@@ -24,11 +32,12 @@ def game_loop(g : PresidentGame):
             print(f"{ai.name} plays \t {plays}")
 
             # Update latest card played
-            if(len(plays)>0):
+            if len(plays) > 0:
                 choice = plays[0].symbol
 
         wanna_continue = input('Do you want to continue playing (y/N)? ')
         wanna_continue = (wanna_continue == 'Y' or wanna_continue == 'y')
+
 
 if __name__ == '__main__':
     print_ln()

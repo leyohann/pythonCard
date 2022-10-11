@@ -40,13 +40,26 @@ A partir du fichier `main.py`, implémentez une petite interface pour repr
  Une vérification doit être mise en place pour voir si le choix de l
  'utilisateur est correct.
  
- ## Encore à implémenter
+ ## Encore à implémenter.
+ 
+ > Réaliser l'ensemble de ces fonctionnalités en TDD. 
+ 
+> Les fichiers de tests sont là pour celà. 
+ Dans un premier temps, executez les tests existants pour voir s'ils fonctionnent. 
+ Réparez les si nécessaire.
+ 
+ > Puis implémentez une nouvelle série de tests pour implémenter 
+ une des fonctionnalités listées ci-dessous.
+
+> Ceci vous oblige à devoir d'abord réfléchir sur la conception des objets. 
+ Et leurs interactions.
+ 
  - [ ] Le déroulé d'une manche. 
     - Chaque utilisateur doit fournir s'il peut (ou veut) la quantité de cartes demandées.
     - Les cartes doivent être du même type
     - Le vainqueur d'une manche ouvre la manche suivante
     - Il existe un gagnant
- - [ ] Gestion d'une fin et lancé de nouvelle partie
+ - [ ] Gestion d'une fin et lancement d'une nouvelle partie, affichage des scores
  - [ ] Le mécanisme de troufion et de président
     - En fonction du nombre de joueurs, il peut exister : 
         - Un président et un troufion si 3 ou 4 joueurs (1 carte)
