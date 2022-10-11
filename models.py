@@ -33,7 +33,7 @@ class Deck:
         """ Mélanger les cartes de mon deck. """
         random.shuffle(self.__cards)
 
-    def pickCard(self):
+    def pick_card(self):
         return self.cards.pop(0)
 
     def __str__(self) -> str:
@@ -174,7 +174,7 @@ class PresidentGame:
         giving_card_to_player = 0
         nb_players = len(self.__players)
         while len(self.__deck.cards) > 0:
-            card = self.__deck.pickCard()
+            card = self.__deck.pick_card()
             self.__players[giving_card_to_player].add_to_hand(card)
             giving_card_to_player = (giving_card_to_player+1) % nb_players
 
