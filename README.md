@@ -40,4 +40,17 @@ A partir du fichier `main.py`, implémentez une petite interface pour repr
  Une vérification doit être mise en place pour voir si le choix de l
  'utilisateur est correct.
  
- 
+ ## Encore à implémenter
+ - [ ] Le déroulé d'une manche. 
+    - Chaque utilisateur doit fournir s'il peut (ou veut) la quantité de cartes demandées.
+    - Les cartes doivent être du même type
+    - Le vainqueur d'une manche ouvre la manche suivante
+    - Il existe un gagnant
+ - [ ] Gestion d'une fin et lancé de nouvelle partie
+ - [ ] Le mécanisme de troufion et de président
+    - En fonction du nombre de joueurs, il peut exister : 
+        - Un président et un troufion si 3 ou 4 joueurs (1 carte)
+        - Ajout d'un vice président et d'un vice troufion si 5+ (2 cartes (président <-> trouffion), 1 carte (vice <-> vice))
+    - Le troufion doit donner sa meilleure carte, le président choisit quelle carte donner
+ - [ ] Interface graphique
+ - [ ] Intelligence artificielle 
