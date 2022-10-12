@@ -14,7 +14,7 @@ def game_loop(g: PresidentGame):
     """
     wanna_continue = True
     while wanna_continue:
-        if g.main_player.hand != []:
+        while len(g.main_player.hand) != 0:
             print('Your current deck is : ')
             print(g.main_player.hand, )
             print_ln()
@@ -34,10 +34,10 @@ def game_loop(g: PresidentGame):
                 # Update latest card played
                 if len(plays) > 0:
                     choice = plays[0].symbol
-            else:
-                print('BRAVO! Champs, you win!!!')
             wanna_continue = input('Do you want to continue playing (y/N)? ')
             wanna_continue = (wanna_continue == 'Y' or wanna_continue == 'y')
+        print('BRAVO! Champs, you win!!!')
+        wanna_continue = False
 
 
 
