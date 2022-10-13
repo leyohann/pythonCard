@@ -13,6 +13,10 @@ def game_loop(g: PresidentGame):
         g: The President Game instance.
     """
     wanna_continue = True
+    for ai in g.ai_players:
+        print(f"Adversaire:{ai.name} ,nombre de cartes:{len(ai.hand)}")
+
+
     while wanna_continue:
         while len(g.main_player.hand) != 0:
             print('Your current deck is : ')
