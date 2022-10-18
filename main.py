@@ -3,8 +3,6 @@ from models import PresidentGame
 
 def print_ln():
     print('\n')
-
-
 def game_loop(g: PresidentGame):
     """
     The main game loop.
@@ -15,8 +13,6 @@ def game_loop(g: PresidentGame):
     wanna_continue = True
     for ai in g.ai_players:
         print(f"Adversaire:{ai.name} ,nombre de cartes:{len(ai.hand)}")
-
-
     while wanna_continue:
         while len(g.main_player.hand) != 0:
             print('Your current deck is : ')
@@ -34,14 +30,18 @@ def game_loop(g: PresidentGame):
             for ai in g.ai_players:
                 plays = ai.play(choice, nb_cards)
                 print(f"{ai.name} plays \t {plays}")
+                print(f"{ai.name} : {ai.hand}")
 
-                # Update latest card played
+                # Update the latest card played
                 if len(plays) > 0:
                     choice = plays[0].symbol
             wanna_continue = input('Do you want to continue playing (y/N)? ')
             wanna_continue = (wanna_continue == 'Y' or wanna_continue == 'y')
         print('BRAVO! Champs, you win!!!')
         wanna_continue = False
+
+
+print("end of game")
 
 
 
