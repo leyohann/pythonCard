@@ -1,4 +1,5 @@
 from models import PresidentGame
+from random import randrange
 
 
 def print_ln():
@@ -11,14 +12,18 @@ def game_loop(g: PresidentGame):
         g: The President Game instance.
     """
     wanna_continue = True
+    gameover = False
+    empty = 0
     for ai in g.ai_players:
         print(f"Adversaire:{ai.name} ,nombre de cartes:{len(ai.hand)}")
+    print(f"{g.players}")
     while wanna_continue:
-        while len(g.main_player.hand) != 0:
+        while len(g.main_player.hand) != 0 and gameover is False:
             print('Your current deck is : ')
             print(g.main_player.hand, )
             print_ln()
             choice = '0'
+
 
             while g.main_player.has_symbol(choice) == 0:
                 choice = input('What value do you wish to play ? ')
@@ -30,13 +35,22 @@ def game_loop(g: PresidentGame):
             for ai in g.ai_players:
                 plays = ai.play(choice, nb_cards)
                 print(f"{ai.name} plays \t {plays}")
-                print(f"{ai.name} : {ai.hand}")
+                #print(f"{ai.name} : {ai.hand}")
 
                 # Update the latest card played
                 if len(plays) > 0:
                     choice = plays[0].symbol
             wanna_continue = input('Do you want to continue playing (y/N)? ')
             wanna_continue = (wanna_continue == 'Y' or wanna_continue == 'y')
+            for ai in g.ai_players:
+                if ai.hand is []:
+                    empty = empty+1
+                    print(empty)
+                    if empty == 2:
+                        gameover = True
+                        print("gameover is true")
+            empty = 0
+
         print('BRAVO! Champs, you win!!!')
         wanna_continue = False
 

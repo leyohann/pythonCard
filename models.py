@@ -157,7 +157,11 @@ class AIPlayer(Player):
 
 
 class PresidentGame:
-    def __init__(self, nb_players: int = 4):
+    num_opp = input("how many opponents do you want: ")
+    nb_opponents = num_opp
+
+    def __init__(self, nb_players: int = int(nb_opponents)+1):
+
         self.__generate_players(nb_players)
         self.__generate_cards()
         self.round = 0
@@ -191,3 +195,7 @@ class PresidentGame:
     def main_player(self):
         """ Main player is player 0 """
         return self.__players[0]
+
+    @property
+    def first_player(self):
+        """ player that opens the game"""
