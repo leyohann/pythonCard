@@ -1,4 +1,5 @@
 import random
+from random import randrange
 import names
 
 COLORS = ['♡', '♤', '♧', '♢']
@@ -153,6 +154,10 @@ class AIPlayer(Player):
                 cards_played = self._hand[index:index+nb_cards]
                 best_choice = card.symbol
                 self.remove_from_hand(cards_played)
+            elif choice ==[]:
+                cards_played = self._hand[index:index + nb_cards]
+                best_choice = card.symbol
+
         return cards_played if best_choice is not None else []
 
 
@@ -160,7 +165,7 @@ class PresidentGame:
     num_opp = input("how many opponents do you want: ")
     nb_opponents = num_opp
 
-    def __init__(self, nb_players: int = int(nb_opponents)+1):
+    def __init__(self, nb_players: int = int(nb_opponents)+1 if int(nb_opponents) < 52 else print("chose a correct value")):
 
         self.__generate_players(nb_players)
         self.__generate_cards()
@@ -178,6 +183,9 @@ class PresidentGame:
     def distribute_cards(self):
         giving_card_to_player = 0
         nb_players = len(self.__players)
+        while len(self.__deck.cards) % nb_players != 0:
+            self.__deck.cards.pop(0)
+            self.__deck.shuffle()
         while len(self.__deck.cards) > 0:
             card = self.__deck.pick_card()
             self.__players[giving_card_to_player].add_to_hand(card)
@@ -197,5 +205,7 @@ class PresidentGame:
         return self.__players[0]
 
     @property
-    def first_player(self):
+    def first_player(self, nb_players: int):
         """ player that opens the game"""
+        randomized = randrange(nb_players)
+        return self.__players[randomized]

@@ -22,13 +22,8 @@ def game_loop(g: PresidentGame):
             print('Your current deck is : ')
             print(g.main_player.hand, )
             print_ln()
-            choice = '0'
-
-
-            while g.main_player.has_symbol(choice) == 0:
-                choice = input('What value do you wish to play ? ')
-
-            plays = g.main_player.play(choice)
+            choice = input('What value do you wish to play ? ')
+            plays = g.first_player.play(choice)
             print(f"You play {plays}")
 
             nb_cards = len(plays)
