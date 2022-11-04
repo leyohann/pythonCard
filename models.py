@@ -88,6 +88,7 @@ class Card:
 
 class Player:
     def __init__(self, player_name=None):
+        self.id_token = 3
         self._name: str = player_name if player_name is not None else \
             names.get_first_name()
         self._hand: list = []
@@ -126,6 +127,12 @@ class Player:
     def __repr__(self):
         return f"{self.name}\t: {self.hand}"
 
+    def __eq__(self, other):
+        return self.id_token == other.id_token
+
+    def __ne__(self, other):
+        return self.id_token != other.id_token
+
     def has_symbol(self, card_symbol) -> int:
         nb_cards = 0
         for card in self._hand:
@@ -135,7 +142,10 @@ class Player:
 
 
 class AIPlayer(Player):
-    def play(self, choice, nb_cards: int) -> list:
+    id_token = 0
+    def play(self, choice, nb_cards: int = 1) \
+            -> list:
+
         """
         Play a card correspondig to what has been played on the table.
         TODO: Implement an AI
@@ -147,25 +157,36 @@ class AIPlayer(Player):
 
         """
         best_choice = None
-        for index, card in enumerate(self.hand):
+        for index, card in enumerate(self.hand): # TODO rationnaliser les choix
+            if choice == "":
+                max_possible_value = 15 # FIXME
+                for index2, card2 in enumerate(self.hand):
+                    if (index2 + 1) < len(self.hand):
+                        nextCard = self.hand[index2 + 1]
+                        if nextCard.value == card2.value:
+                            nb_cards = nb_cards+1
+                    if card2.value < max_possible_value:
+                        max_possible_value = card2.value
+                        if card2.value == max_possible_value:
+                            cards_played = self._hand[index:index2+nb_cards]
+                        self.remove_from_hand(cards_played)
+                    return cards_played
             if best_choice is None and card.symbol >= choice and \
                     self.has_symbol(card.symbol) >= \
                     nb_cards:
                 cards_played = self._hand[index:index+nb_cards]
                 best_choice = card.symbol
                 self.remove_from_hand(cards_played)
-            elif choice ==[]:
-                cards_played = self._hand[index:index + nb_cards]
-                best_choice = card.symbol
+                return cards_played
 
-        return cards_played if best_choice is not None else []
 
 
 class PresidentGame:
-    num_opp = input("how many opponents do you want: ")
-    nb_opponents = num_opp
+    num_opps = input("how many opponents do you want: ")
+    nb_opponents = num_opps
 
-    def __init__(self, nb_players: int = int(nb_opponents)+1 if int(nb_opponents) < 52 else print("chose a correct value")):
+    def __init__(self, nb_players: int = int(nb_opponents)+1 if int(nb_opponents) < 52 else print("chose a correct "
+                                                                                                  "value")):
 
         self.__generate_players(nb_players)
         self.__generate_cards()
@@ -205,7 +226,7 @@ class PresidentGame:
         return self.__players[0]
 
     @property
-    def first_player(self, nb_players: int):
+    def first_player(self):
         """ player that opens the game"""
-        randomized = randrange(nb_players)
+        randomized = randrange(len(self.__players))
         return self.__players[randomized]
