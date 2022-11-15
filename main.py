@@ -24,7 +24,7 @@ def game_loop(g: PresidentGame):
             print('Your current deck is : ')
             print(g.main_player.hand, )
             print_ln()
-            if g.first_player == g.main_player :
+            if g.first_player == g.main_player:
                 choice = ""
                 plays = g.first_player.play(choice)
                 print(f"{plays}")
@@ -35,7 +35,6 @@ def game_loop(g: PresidentGame):
             for ai in g.ai_players:
                 plays = ai.play(choice, nb_cards)
                 print(f"{ai.name} plays \t {plays}")
-                # print(f"{ai.name} : {ai.hand}")
             wanna_continue = input('Do you want to continue playing (y/N)? ')
             wanna_continue = (wanna_continue == 'Y' or wanna_continue == 'y')
             for ai in g.ai_players:

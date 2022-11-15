@@ -23,5 +23,11 @@ class TestCardsExercice2(unittest.TestCase):
         self.assertTrue(len(player_1.hand) > 0)
         self.assertTrue(len(player_1.hand) >= len(player_2.hand))
 
+    def test_ai_player_can_play_first(self):
+
+        game = models.PresidentGame()
+        choice = ""
+        self.assertFalse(game.first_player.play(choice) is None)
+
 if __name__ == '__main__':
     unittest.main()
