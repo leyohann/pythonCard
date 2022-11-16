@@ -157,7 +157,7 @@ class AIPlayer(Player):
 
         """
         best_choice = None
-        for index, card in enumerate(self.hand): # TODO rationnaliser les choix
+        for index, card in enumerate(self.hand):
             if choice == "":
                 max_possible_value = 15 # FIXME
                 for index2, card2 in enumerate(self.hand):

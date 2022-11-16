@@ -7,23 +7,28 @@ def print_ln():
 
 
 def game_loop(g: PresidentGame):
+
     """
     The main game loop.
     Loops in circle until the user wants to quit the application.
     Args:
         g: The President Game instance.
     """
+
     wanna_continue = True
     gameover = False
     empty = 0
     print(f"premier joueur : {g.first_player.name}")
+
     for ai in g.ai_players:
-        print(f"Adversaire:{ai.name} ,nombre de cartes:{len(ai.hand)}, main:{ai.hand}")
+        print(f"Adversaire:{ai.name} ,nombre de cartes:{len(ai.hand)}")
+
     while wanna_continue:
         while len(g.main_player.hand) != 0 and gameover is False:
             print('Your current deck is : ')
             print(g.main_player.hand, )
             print_ln()
+
             if g.first_player == g.main_player:
                 choice = ""
                 plays = g.first_player.play(choice)
@@ -35,8 +40,10 @@ def game_loop(g: PresidentGame):
             for ai in g.ai_players:
                 plays = ai.play(choice, nb_cards)
                 print(f"{ai.name} plays \t {plays}")
+
             wanna_continue = input('Do you want to continue playing (y/N)? ')
             wanna_continue = (wanna_continue == 'Y' or wanna_continue == 'y')
+
             for ai in g.ai_players:
                 if ai.hand is []:
                     empty = empty + 1
